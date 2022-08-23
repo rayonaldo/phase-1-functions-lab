@@ -1,37 +1,36 @@
 // Code your solution in this file!
-function distanceFromHqInBlocks(someValue) {
-    if (someValue<=42) {
-        return (42-someValue)
-    } else {
-        return (someValue-42)
-    }
-    
+function distanceFromHqInBlocks(streetNumber) {
+  const blockNumber = (streetNumber - 42 );
+  if (streetNumber >= 42) {
+      return blockNumber;
+  } else {
+      return (blockNumber * -1);
   }
-  function distanceFromHqInFeet (someValue) {
-    return distanceFromHqInBlocks(someValue)*264;
-    // calls distanceFromHqInBlocks from inside the distanceFromHqInFeet function, passing the argument from distanceFromHqInFeet into distanceFromHqInBlocks
-    //the return value of distanceFromHqInBlocks can then be used to calculate feet
-  }
+}
 
-  function distanceTravelledInFeet(a,b){
-    if (b>a){
-      return((b-a)*264);
-    }
-    else
-      return((a-b)*264);
+function distanceFromHqInFeet(streetNumber) {
+  return (distanceFromHqInBlocks(streetNumber) * 264);
+}
+
+function distanceTravelledInFeet(streetNumber1, streetNumber2) {
+  const feetDifference = (distanceFromHqInFeet(streetNumber1) - distanceFromHqInFeet(streetNumber2))
+  if (feetDifference >= 0) {
+      return feetDifference;
+  } else {
+      return (feetDifference * -1);
   }
-  function calculatesFarePrice(start,destination){
-    let distance = distanceTravelledInFeet(start,destination);
-    if (distance<= 400){
-      return 0;
-    }
-    if (distance>=400 && distance<=2000){
-      return (distance-400)* 0.02;
-    }
-    else if(distance>=2000&& distance<=2500){
+}
+
+function calculatesFarePrice(start, destination) {
+  const feetTravelled = (distanceTravelledInFeet(start, destination))
+  if (feetTravelled <= 400) {
+    return 0;
+  } else if (feetTravelled >= 400 && feetTravelled <= 2000) {
+      return ((feetTravelled - 400) * 0.02);
+  } else if (feetTravelled >= 2000 && feetTravelled <= 2500) {
       return 25;
-    }
-    else if (distance > 2500){
-      return "cannot travel that far";
-    }
+  } else {
+    return 'cannot travel that far';
   }
+}
+
